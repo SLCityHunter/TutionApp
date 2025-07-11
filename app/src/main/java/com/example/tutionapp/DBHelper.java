@@ -8,18 +8,38 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME    = "tuition.db";
-    private static final int    DB_VERSION = 2;  // bumped from 1 to 2
+    private static final int    DB_VERSION = 7;
 
-    public static final String TABLE_USER        = "users";
-    private static final String COL_ID            = "id";
-    private static final String COL_NAME          = "name";
-    private static final String COL_EMAIL         = "email";
-    private static final String COL_PASSWORD      = "password";
-    private static final String COL_ROLE          = "role";
-    private static final String COL_BIRTH_YEAR    = "birth_year";
-    private static final String COL_PHONE         = "phone";
-    private static final String COL_EMERGENCY_NAME  = "emergency_name";
-    private static final String COL_EMERGENCY_PHONE = "emergency_phone";
+    // === USERS TABLE ===
+    public static final String TABLE_USERS           = "users";
+    private static final String COL_USER_ID          = "id";
+    private static final String COL_USER_NAME        = "name";
+    private static final String COL_USER_EMAIL       = "email";
+    private static final String COL_USER_PASSWORD    = "password";
+    private static final String COL_USER_ROLE        = "role";
+    private static final String COL_USER_BIRTH_YEAR  = "birth_year";
+    private static final String COL_USER_PHONE       = "phone";
+    private static final String COL_USER_EMER_NAME   = "emergency_name";
+    private static final String COL_USER_EMER_PHONE  = "emergency_phone";
+
+    // === ASSIGNED CLASSES ===
+    public static final String TABLE_ASSIGNED_CLASSES = "assigned_classes";
+
+    // === ATTENDANCE ===
+    public static final String TABLE_ATTENDANCE       = "attendance";
+
+    // === TUITION CLASSES ===
+    public static final String TABLE_TUITION_CLASSES  = "tuition_classes";
+
+    // === MATERIALS ===
+    public static final String TABLE_MATERIALS        = "materials";
+    public static final String TABLE_ASSIGNMENTS = "assignments";
+
+    public static final String TABLE_NOTIFICATIONS = "notifications";
+
+
+
+
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -27,85 +47,380 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create the users table with all eight fields
-        String createUsers =
-                "CREATE TABLE " + TABLE_USER + " (" +
-                        COL_ID              + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COL_NAME            + " TEXT, " +
-                        COL_EMAIL           + " TEXT UNIQUE, " +
-                        COL_PASSWORD        + " TEXT, " +
-                        COL_ROLE            + " TEXT, " +
-                        COL_BIRTH_YEAR      + " INTEGER, " +
-                        COL_PHONE           + " TEXT, " +
-                        COL_EMERGENCY_NAME  + " TEXT, " +
-                        COL_EMERGENCY_PHONE + " TEXT" +
-                        ")";
-        db.execSQL(createUsers);
+        // 1) users
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_USERS + " (" +
+                        COL_USER_ID        + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COL_USER_NAME      + " TEXT, " +
+                        COL_USER_EMAIL     + " TEXT UNIQUE, " +
+                        COL_USER_PASSWORD  + " TEXT, " +
+                        COL_USER_ROLE      + " TEXT, " +
+                        COL_USER_BIRTH_YEAR+ " INTEGER, " +
+                        COL_USER_PHONE     + " TEXT, " +
+                        COL_USER_EMER_NAME + " TEXT, " +
+                        COL_USER_EMER_PHONE+ " TEXT" +
+                        ")"
+        );
+
+        // 2) assigned_classes
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_ASSIGNED_CLASSES + " (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "email TEXT, " +
+                        "class_name TEXT" +
+                        ")"
+        );
+
+        // 3) attendance
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_ATTENDANCE + " (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "email TEXT, " +
+                        "timestamp INTEGER" +
+                        ")"
+        );
+
+        // 4) tuition_classes
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_TUITION_CLASSES + " (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "teacher_email TEXT, " +
+                        "class_name TEXT, " +
+                        "description TEXT" +
+                        ")"
+        );
+
+        // 5) materials
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_MATERIALS + " (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "class_id INTEGER, " +
+                        "file_name TEXT, " +
+                        "file_uri TEXT, " +
+                        "uploaded_at INTEGER" +
+                        ")"
+        );
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_ASSIGNMENTS + " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "class_id INTEGER, " +
+                "file_name TEXT, " +
+                "file_uri TEXT, " +
+                "uploaded_at INTEGER)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS student_assignments (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "student_email TEXT, " +
+                "class_id INTEGER, " +
+                "file_name TEXT, " +
+                "file_uri TEXT, " +
+                "uploaded_at INTEGER)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NOTIFICATIONS + " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "title TEXT, " +
+                "message TEXT, " +
+                "recipient_email TEXT, " +
+                "timestamp INTEGER)");
+
+
+
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop & recreate the table on schema change
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+    public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASSIGNED_CLASSES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ATTENDANCE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TUITION_CLASSES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MATERIALS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASSIGNMENTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTIFICATIONS);
+
+
         onCreate(db);
     }
 
-    /**
-     * Inserts a new user with all sign-up fields.
-     * Returns true on success, false if email already exists or error.
-     */
-    public boolean insertUser(
-            String name,
-            String email,
-            String pwd,
-            String role,
-            int birthYear,
-            String phone,
-            String emergencyName,
-            String emergencyPhone
-    ) {
+    // ==== USER CRUD ====
+
+    public boolean insertUser(String name, String email, String pwd, String role,
+                              int birthYear, String phone, String emerName, String emerPhone) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COL_NAME,           name);
-        cv.put(COL_EMAIL,          email);
-        cv.put(COL_PASSWORD,       pwd);
-        cv.put(COL_ROLE,           role);
-        cv.put(COL_BIRTH_YEAR,     birthYear);
-        cv.put(COL_PHONE,          phone);
-        cv.put(COL_EMERGENCY_NAME, emergencyName);
-        cv.put(COL_EMERGENCY_PHONE,emergencyPhone);
-
-        long id = db.insert(TABLE_USER, null, cv);
-        return id != -1;
+        cv.put(COL_USER_NAME, name);
+        cv.put(COL_USER_EMAIL, email);
+        cv.put(COL_USER_PASSWORD, pwd);
+        cv.put(COL_USER_ROLE, role);
+        cv.put(COL_USER_BIRTH_YEAR, birthYear);
+        cv.put(COL_USER_PHONE, phone);
+        cv.put(COL_USER_EMER_NAME, emerName);
+        cv.put(COL_USER_EMER_PHONE, emerPhone);
+        return db.insert(TABLE_USERS, null, cv) != -1;
     }
 
-    /**
-     * Retrieves a user row (all eight fields) by email.
-     * Caller must close the returned Cursor.
-     */
     public Cursor getUserByEmail(String email) {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.query(
-                TABLE_USER,
-                new String[]{
-                        COL_ID,
-                        COL_NAME,
-                        COL_EMAIL,
-                        COL_PASSWORD,
-                        COL_ROLE,
-                        COL_BIRTH_YEAR,
-                        COL_PHONE,
-                        COL_EMERGENCY_NAME,
-                        COL_EMERGENCY_PHONE
-                },
-                COL_EMAIL + "=?",
+        return getReadableDatabase().query(
+                TABLE_USERS, null,
+                COL_USER_EMAIL + "=?",
                 new String[]{ email },
                 null, null, null
         );
     }
+
     public Cursor getAllUsers() {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.query(TABLE_USER, null, null, null, null, null, "name ASC");
+        return getReadableDatabase().query(
+                TABLE_USERS, null,
+                null, null,
+                null, null,
+                COL_USER_NAME + " ASC"
+        );
     }
+
+    public boolean updateUser(String email, String name, String pwd, String role,
+                              int birthYear, String phone, String emerName, String emerPhone) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_USER_NAME, name);
+        cv.put(COL_USER_PASSWORD, pwd);
+        cv.put(COL_USER_ROLE, role);
+        cv.put(COL_USER_BIRTH_YEAR, birthYear);
+        cv.put(COL_USER_PHONE, phone);
+        cv.put(COL_USER_EMER_NAME, emerName);
+        cv.put(COL_USER_EMER_PHONE, emerPhone);
+        return db.update(TABLE_USERS, cv, COL_USER_EMAIL + "=?",
+                new String[]{ email }) > 0;
+    }
+
+    public boolean deleteUserByEmail(String email) {
+        return getWritableDatabase().delete(
+                TABLE_USERS, COL_USER_EMAIL + "=?",
+                new String[]{ email }) > 0;
+    }
+
+    // ==== CLASS ASSIGNMENTS ====
+
+    public boolean assignClass(String email, String className) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("email", email);
+        cv.put("class_name", className);
+        return db.insert(TABLE_ASSIGNED_CLASSES, null, cv) != -1;
+    }
+
+    public Cursor getAllAssignedClasses() {
+        return getReadableDatabase().query(
+                TABLE_ASSIGNED_CLASSES,
+                null, null, null,
+                null, null,
+                "email ASC"
+        );
+    }
+
+    public Cursor getClassSummaryReport() {
+        return getReadableDatabase().rawQuery(
+                "SELECT class_name, COUNT(email) AS student_count " +
+                        "FROM " + TABLE_ASSIGNED_CLASSES + " " +
+                        "GROUP BY class_name " +
+                        "ORDER BY class_name ASC", null
+        );
+    }
+
+    // ==== ATTENDANCE ====
+
+    public boolean markAttendance(String email) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("email", email);
+        cv.put("timestamp", System.currentTimeMillis());
+        return db.insert(TABLE_ATTENDANCE, null, cv) != -1;
+    }
+
+    public Cursor getAllAttendance() {
+        return getReadableDatabase().query(
+                TABLE_ATTENDANCE,
+                new String[]{ "email", "timestamp" },
+                null, null, null, null,
+                "timestamp DESC"
+        );
+    }
+
+    // ==== TUITION CLASSES CRUD ====
+
+    public boolean insertTuitionClass(String teacherEmail, String className, String desc) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("teacher_email", teacherEmail);
+        cv.put("class_name", className);
+        cv.put("description", desc);
+        return db.insert(TABLE_TUITION_CLASSES, null, cv) != -1;
+    }
+
+    public Cursor getTuitionClassesByTeacher(String teacherEmail) {
+        return getReadableDatabase().query(
+                TABLE_TUITION_CLASSES,
+                null,
+                "teacher_email=?",
+                new String[]{ teacherEmail },
+                null, null,
+                "class_name ASC"
+        );
+    }
+    public Cursor getAllTuitionClasses() {
+        return getReadableDatabase().query(
+                TABLE_TUITION_CLASSES,
+                null,
+                null, null,
+                null, null,
+                "class_name ASC"
+        );
+    }
+
+
+    public boolean updateTuitionClass(int id, String className, String desc) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("class_name", className);
+        cv.put("description", desc);
+        return db.update(TABLE_TUITION_CLASSES, cv,
+                "id=?", new String[]{ String.valueOf(id) }) > 0;
+    }
+
+    public boolean deleteTuitionClass(int id) {
+        return getWritableDatabase().delete(
+                TABLE_TUITION_CLASSES,
+                "id=?", new String[]{ String.valueOf(id) }) > 0;
+    }
+
+    public int getClassIdByName(String className) {
+        Cursor c = getReadableDatabase().query(
+                TABLE_TUITION_CLASSES,
+                new String[]{ "id" },
+                "class_name=?",
+                new String[]{ className },
+                null, null, null
+        );
+        int id = -1;
+        if (c.moveToFirst()) {
+            id = c.getInt(c.getColumnIndexOrThrow("id"));
+        }
+        c.close();
+        return id;
+    }
+
+    // ==== MATERIALS CRUD ====
+
+    public boolean insertMaterial(int classId, String fileName, String fileUri) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("class_id", classId);
+        cv.put("file_name", fileName);
+        cv.put("file_uri", fileUri);
+        cv.put("uploaded_at", System.currentTimeMillis());
+        return db.insert(TABLE_MATERIALS, null, cv) != -1;
+    }
+
+    public Cursor getMaterialsByClass(int classId) {
+        return getReadableDatabase().query(
+                TABLE_MATERIALS, null,
+                "class_id=?", new String[]{ String.valueOf(classId) },
+                null, null,
+                "uploaded_at DESC"
+        );
+    }
+
+    public boolean deleteMaterial(int id) {
+        return getWritableDatabase().delete(
+                TABLE_MATERIALS,
+                "id=?", new String[]{ String.valueOf(id) }) > 0;
+    }
+    public Cursor getAllTuitionClassNames() {
+        return getReadableDatabase().query(
+                TABLE_TUITION_CLASSES,
+                new String[]{"class_name"},
+                null, null, null, null,
+                "class_name ASC"
+        );
+    }
+    public boolean insertAssignment(int classId, String fileName, String fileUri) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("class_id", classId);
+        cv.put("file_name", fileName);
+        cv.put("file_uri", fileUri);
+        cv.put("uploaded_at", System.currentTimeMillis());
+        return db.insert(TABLE_ASSIGNMENTS, null, cv) != -1;
+    }
+
+    public Cursor getAssignmentsByClass(int classId) {
+        return getReadableDatabase().query(TABLE_ASSIGNMENTS,
+                null, "class_id=?", new String[]{String.valueOf(classId)},
+                null, null, "uploaded_at DESC");
+    }
+
+    public boolean deleteAssignment(int id) {
+        return getWritableDatabase().delete(TABLE_ASSIGNMENTS,
+                "id=?", new String[]{String.valueOf(id)}) > 0;
+    }
+    public boolean insertStudentAssignment(String email, int classId, String fileName, String uri) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("student_email", email);
+        cv.put("class_id", classId);
+        cv.put("file_name", fileName);
+        cv.put("file_uri", uri);
+        cv.put("uploaded_at", System.currentTimeMillis());
+        return db.insert("student_assignments", null, cv) != -1;
+    }
+    public Cursor getSubmissionsByClass(int classId) {
+        return getReadableDatabase().query(
+                "student_assignments",
+                null,
+                "class_id = ?",
+                new String[]{String.valueOf(classId)},
+                null, null,
+                "uploaded_at DESC"
+        );
+    }
+    public boolean insertNotification(String title, String message, String recipientEmail) {
+        ContentValues cv = new ContentValues();
+        cv.put("title", title);
+        cv.put("message", message);
+        cv.put("recipient_email", recipientEmail);
+        cv.put("timestamp", System.currentTimeMillis());
+        return getWritableDatabase().insert("notifications", null, cv) != -1;
+    }
+    public Cursor getNotificationsForStudent(String email) {
+        return getReadableDatabase().query("notifications",
+                null, "recipient_email = ?", new String[]{email},
+                null, null, "timestamp DESC");
+    }
+    public Cursor getStudentAssignments(String email) {
+        return getReadableDatabase().query(
+                "student_assignments",
+                null,
+                "student_email = ?",
+                new String[]{email},
+                null, null,
+                "uploaded_at DESC"
+        );
+    }
+    public Cursor getAllTeacherAssignments() {
+        return getReadableDatabase().query(
+                TABLE_ASSIGNMENTS,
+                null,
+                null, null,
+                null, null,
+                "uploaded_at DESC"
+        );
+    }
+
+
+
+
+
+
+
+
+
+
 
 }

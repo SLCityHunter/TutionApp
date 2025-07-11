@@ -7,23 +7,45 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class TeacherHomeActivity extends AppCompatActivity {
 
-    private Button btnManageCourses, btnViewStudents;
+    private Button btnManageTuitionClasses, btnManageMaterials, btnViewStudents, btnScanAttendance, btnAssignStudents, btnNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_home);
 
-        btnManageCourses = findViewById(R.id.btnManageCourses);
-        btnViewStudents  = findViewById(R.id.btnViewStudents);
+        btnManageTuitionClasses = findViewById(R.id.btnManageTuitionClasses);
+        btnManageMaterials      = findViewById(R.id.btnManageMaterials);
+        btnViewStudents         = findViewById(R.id.btnViewStudents);
+        btnScanAttendance       = findViewById(R.id.btnScanAttendance);
+        btnAssignStudents = findViewById(R.id.btnAssignStudents);
+        btnNotify = findViewById(R.id.btnSendNotification);
 
-        // TODO: implement screens for these actions
-        btnManageCourses.setOnClickListener(v ->
+        btnNotify.setOnClickListener(v -> {
+            Intent i = new Intent(this, SendNotificationActivity.class);
+            startActivity(i);
+        });
+
+
+        btnAssignStudents.setOnClickListener(v ->
                 startActivity(new Intent(this, AssignCoursesActivity.class))
         );
 
+
+        btnManageTuitionClasses.setOnClickListener(v ->
+                startActivity(new Intent(this, ManageTuitionClassesActivity.class))
+        );
+
+        btnManageMaterials.setOnClickListener(v ->
+                startActivity(new Intent(this, ManageMaterialsActivity.class))
+        );
+
         btnViewStudents.setOnClickListener(v ->
-                startActivity(new Intent(this, ManageUsersActivity.class))
+                startActivity(new Intent(this, ViewAssignedStudentsActivity.class))
+        );
+
+        btnScanAttendance.setOnClickListener(v ->
+                startActivity(new Intent(this, TeacherScanAttendanceActivity.class))
         );
     }
 }

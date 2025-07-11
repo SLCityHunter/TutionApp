@@ -70,5 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(new Intent(this, AuthActivity.class));
             finish();
         });
+
     }
+
 }

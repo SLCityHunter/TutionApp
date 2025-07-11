@@ -24,7 +24,7 @@ public class StudentHomeActivity extends AppCompatActivity {
             btnNotifications = findViewById(R.id.btnNotifications);
 
             btnAttendance.setOnClickListener(v ->
-                    startActivity(new Intent(this, AttendanceActivity.class))
+                    startActivity(new Intent(this, StudentQRCodeActivity.class))
             );
             btnAssignments.setOnClickListener(v ->
                     startActivity(new Intent(this, AssignmentsActivity.class))

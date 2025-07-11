@@ -11,6 +11,30 @@
         android:theme="@style/Theme.TutionApp"
         tools:targetApi="31">
         <activity
+            android:name=".SendNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewMaterialsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAssignedStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageMaterialsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageTuitionClassesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudentQRCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherScanAttendanceActivity"
+            android:exported="false" />
+        <activity
             android:name=".TeacherHomeActivity"
             android:exported="false" />
         <activity

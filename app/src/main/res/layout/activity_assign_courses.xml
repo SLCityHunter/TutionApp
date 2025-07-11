@@ -1,44 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- placeholders for selecting student and course -->
-        <TextView
-            android:text="Select Student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+        <!-- Student selection -->
+        <TextView android:text="Select or type student email" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
         <Spinner
-            android:id="@+id/spinnerStudents"
+            android:id="@+id/spinnerStudent"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"  />
+        <EditText
+            android:id="@+id/etStudentEmail"
+            android:hint="Or type student email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:text="Select Course"
-            android:layout_width="wrap_content"
+        <!-- Class selection -->
+        <TextView android:text="Select or type class name" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinnerClass"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
+            />
 
-        <Spinner
-            android:id="@+id/spinnerCourses"
+        <EditText
+            android:id="@+id/etClassName"
+            android:hint="Or type class name"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginBottom="8dp" />
 
         <Button
             android:id="@+id/btnAssign"
-            android:text="Assign"
+            android:text="Assign Class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="12dp" />
 
+        <TextView
+            android:id="@+id/tvAssignedClasses"
+            android:text="Assigned classes will appear here"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>

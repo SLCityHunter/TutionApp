@@ -31,16 +31,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp" />
 
-    <!-- Manage My Courses -->
+    <!-- Manage Tuition Classes -->
     <Button
-        android:id="@+id/btnManageCourses"
+        android:id="@+id/btnManageTuitionClasses"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Manage My Courses"
+        android:text="Manage Tuition Classes"
         app:layout_constraintTop_toBottomOf="@id/btnTeacher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/btnAssignStudents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Assign Students to Class"
+        app:layout_constraintTop_toBottomOf="@id/btnScanAttendance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Manage Lecture Materials -->
+    <Button
+        android:id="@+id/btnManageMaterials"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Manage Lecture Materials"
+        app:layout_constraintTop_toBottomOf="@id/btnManageTuitionClasses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
     <!-- View Assigned Students -->
     <Button
@@ -48,9 +68,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="View Assigned Students"
-        app:layout_constraintTop_toBottomOf="@id/btnManageCourses"
+        app:layout_constraintTop_toBottomOf="@id/btnManageMaterials"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
+
+    <!-- Scan Attendance (QR) -->
+    <Button
+        android:id="@+id/btnScanAttendance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Scan Attendance (QR)"
+        app:layout_constraintTop_toBottomOf="@id/btnViewStudents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/btnSendNotification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Send Notification"
+        app:layout_constraintTop_toBottomOf="@id/btnAssignStudents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

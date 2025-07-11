@@ -10,7 +10,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
-public class MaterialsActivity extends AppCompatActivity {
+public class ViewMaterialsActivity extends AppCompatActivity {
 
     private Spinner spinnerClass;
     private ListView lvMaterials;
