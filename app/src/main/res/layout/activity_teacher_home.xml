@@ -5,93 +5,96 @@
     android:id="@+id/teacher_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="40dp"
+    android:background="#B2CBB4DB">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Teacher"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
-
-    <!-- Go to Dashboard -->
-    <Button
-        android:id="@+id/btnTeacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Dashboard"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp" />
-
-    <!-- Manage Tuition Classes -->
+    <!-- Tuition Classes -->
     <Button
         android:id="@+id/btnManageTuitionClasses"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Manage Tuition Classes"
-        app:layout_constraintTop_toBottomOf="@id/btnTeacher"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Tuition Classes"
+        android:textColor="#F1E1FD"
+        android:background="@drawable/btn_rounded"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/btnAssignStudents"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Assign Students to Class"
-        app:layout_constraintTop_toBottomOf="@id/btnScanAttendance"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Manage Lecture Materials -->
+    <!-- Assigned Students -->
     <Button
-        android:id="@+id/btnManageMaterials"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Manage Lecture Materials"
+        android:id="@+id/btnViewStudents"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Assigned Students"
+        android:textColor="#EBDBF8"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintTop_toBottomOf="@id/btnManageTuitionClasses"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
-    <!-- View Assigned Students -->
-    <Button
-        android:id="@+id/btnViewStudents"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="View Assigned Students"
-        app:layout_constraintTop_toBottomOf="@id/btnManageMaterials"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Scan Attendance (QR) -->
+    <!-- Scan Attendance -->
     <Button
         android:id="@+id/btnScanAttendance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
         android:text="Scan Attendance (QR)"
+        android:textColor="#ECDDF8"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintTop_toBottomOf="@id/btnViewStudents"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
+
+    <!-- Assign Students -->
     <Button
-        android:id="@+id/btnSendNotification"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Send Notification"
+        android:id="@+id/btnAssignStudents"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Assign Students"
+        android:textColor="#E9DAF6"
+        android:background="@drawable/btn_rounded"
+        app:layout_constraintTop_toBottomOf="@id/btnScanAttendance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Lecture Materials -->
+    <Button
+        android:id="@+id/btnManageMaterials"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Lecture Materials"
+        android:textColor="#EBDCF8"
+        android:background="@drawable/btn_rounded"
         app:layout_constraintTop_toBottomOf="@id/btnAssignStudents"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
+    <!-- Send Notification -->
+    <Button
+        android:id="@+id/btnSendNotification"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Send Notification"
+        android:textColor="#EFE1FB"
+        android:background="@drawable/btn_rounded"
+        app:layout_constraintTop_toBottomOf="@id/btnManageMaterials"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
+    <!-- Assign Marks -->
+    <Button
+        android:id="@+id/btnAssignMarks"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Assign Marks"
+        android:textColor="#EEDEFB"
+        android:background="@drawable/btn_rounded"
+        app:layout_constraintTop_toBottomOf="@id/btnSendNotification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

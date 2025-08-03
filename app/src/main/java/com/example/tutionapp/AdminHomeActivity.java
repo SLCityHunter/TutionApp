@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class AdminHomeActivity extends AppCompatActivity {
 
 
-        private Button btnManageUsers, btnAssignCourses, btnViewReports;
+        private Button btnManageUsers, btnAssignCourses, btnViewReports, btnViewResults;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,12 @@ public class AdminHomeActivity extends AppCompatActivity {
             btnAssignCourses = findViewById(R.id.btnAssignCourses);
             btnViewReports   = findViewById(R.id.btnViewReports);
 
+            btnViewResults = findViewById(R.id.btnViewResults);
+            btnViewResults.setOnClickListener(v -> {
+                // Launch the AllResultsActivity
+                Intent intent = new Intent(this, AllResultsActivity.class);
+                startActivity(intent);
+            });
             btnManageUsers.setOnClickListener(v ->
                     startActivity(new Intent(this, ManageUsersActivity.class))
             );

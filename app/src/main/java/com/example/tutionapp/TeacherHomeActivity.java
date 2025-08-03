@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class TeacherHomeActivity extends AppCompatActivity {
 
-    private Button btnManageTuitionClasses, btnManageMaterials, btnViewStudents, btnScanAttendance, btnAssignStudents, btnNotify;
+    private Button btnManageTuitionClasses, btnManageMaterials, btnViewStudents, btnScanAttendance, btnAssignStudents, btnNotify, btnAssignMarks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,13 @@ public class TeacherHomeActivity extends AppCompatActivity {
         btnScanAttendance       = findViewById(R.id.btnScanAttendance);
         btnAssignStudents = findViewById(R.id.btnAssignStudents);
         btnNotify = findViewById(R.id.btnSendNotification);
+        btnAssignMarks = findViewById(R.id.btnAssignMarks);
+
+        btnAssignMarks.setOnClickListener(v -> {
+            Intent intent = new Intent(TeacherHomeActivity.this, AssignMarksActivity.class);
+            startActivity(intent);
+        });
+
 
         btnNotify.setOnClickListener(v -> {
             Intent i = new Intent(this, SendNotificationActivity.class);

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- 🛰️ Location Permissions (optional, if using GPS features) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -10,6 +14,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TutionApp"
         tools:targetApi="31">
+        <activity
+            android:name=".AllResultsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MarkRecord"
+            android:exported="false" />
+
+        <activity
+            android:name=".AssignMarksActivity"
+            android:exported="false" />
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDwo4w55xdXwulQbKK-C6FSXA-sgkYkwsc" />
+
+        <activity
+            android:name=".StudentMapActivity"
+            android:exported="false"
+            android:label="@string/title_activity_student_map" />
         <activity
             android:name=".SendNotificationActivity"
             android:exported="false" />
@@ -39,7 +72,7 @@
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false" /> <!-- 1) Now the launcher is AdminHomeActivity -->
+            android:exported="false" />
         <activity
             android:name=".AuthActivity"
             android:exported="true">
@@ -48,7 +81,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 2) All other activities are “normal” -->
+        </activity>
         <activity
             android:name=".AdminHomeActivity"
             android:exported="false" />
@@ -75,7 +108,7 @@
             android:exported="false" />
         <activity
             android:name=".NotificationsActivity"
-            android:exported="false" /> <!-- Remove/modify MainActivity if you’re not using it -->
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

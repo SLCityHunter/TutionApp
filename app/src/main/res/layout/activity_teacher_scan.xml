@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center"
+    android:gravity="center_horizontal"
+    android:padding="40dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#B2CBB4DB">
 
+    <!-- Scan QR Button -->
     <Button
         android:id="@+id/btnScan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scan Student QR" />
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Scan Student QR"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#ECDCFA"/>
 
+    <!-- Upload QR Image -->
     <Button
         android:id="@+id/btnUploadQr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
         android:text="Upload QR Image"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#EBDCF8"/>
 
+    <!-- Scan Result -->
     <TextView
         android:id="@+id/tvResult"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last scan: none"
+        android:textColor="#000000"
+        android:textSize="16sp"
         android:layout_marginTop="24dp"/>
 </LinearLayout>

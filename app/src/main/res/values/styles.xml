@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 1) App theme using MaterialComponents -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="android:windowBackground">@color/backgroundLight</item>
+
+        <!-- apply custom button style to all Buttons -->
+        <item name="buttonStyle">@style/CustomButton</item>
+    </style>
+
+    <!-- 2) Custom button style -->
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <!-- MaterialButton background tint -->
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/buttonText</item>
+
+        <!-- Rounded corners -->
+        <item name="cornerRadius">8dp</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="android:windowBackground">@color/backgroundLight</item>
+
+
+
+    </style>
+
+</resources>

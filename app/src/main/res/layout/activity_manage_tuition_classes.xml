@@ -1,16 +1,28 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="16dp"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="40dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B2CBB4DB"> <!-- soft background -->
 
+    <!-- Tuition class list -->
     <ListView
         android:id="@+id/lvTuitionClasses"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:dividerHeight="8dp"
+        android:layout_marginBottom="12dp" />
 
+    <!-- Add button with black text -->
     <Button
         android:id="@+id/btnAddTuitionClass"
         android:text="Add Tuition Class"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#EEDDFB" />
 </LinearLayout>

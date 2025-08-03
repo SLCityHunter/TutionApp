@@ -1,29 +1,41 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:padding="40dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#B2CBB4DB"> <!-- soft background -->
 
+    <!-- Section header: Lecture Materials -->
     <TextView
         android:text="Lecture Materials"
         android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
 
+    <!-- RecyclerView for materials -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMaterials"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_marginBottom="12dp"/>
 
+    <!-- Section header: Assignments -->
     <TextView
         android:text="Assignments"
         android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
 
+    <!-- RecyclerView for assignments -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAssignments"
         android:layout_width="match_parent"

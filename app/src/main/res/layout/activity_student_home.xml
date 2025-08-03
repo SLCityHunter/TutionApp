@@ -1,35 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:padding="40dp"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#B2CBB4DB"> <!-- soft background -->
 
     <Button
         android:id="@+id/btnAttendance"
         android:text="Attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#E3D4F0"/>
 
     <Button
         android:id="@+id/btnAssignments"
         android:text="Assignments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#ECDBFA"/>
 
     <Button
         android:id="@+id/btnMaterials"
         android:text="Materials"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#ECDAFA"/>
 
     <Button
         android:id="@+id/btnNotifications"
         android:text="Notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#EBDCF8"/>
 
+    <Button
+        android:id="@+id/btnStudentMap"
+        android:text="Location"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#E6D5F4"/>
+
+    <Button
+        android:id="@+id/btnViewResults"
+        android:text="Marks"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_rounded"
+        android:textColor="#ECDCFA"/>
 </LinearLayout>

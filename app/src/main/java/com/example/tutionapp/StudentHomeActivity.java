@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class StudentHomeActivity extends AppCompatActivity {
 
-    private Button btnAttendance, btnAssignments, btnMaterials, btnNotifications;
+    private Button btnAttendance, btnAssignments, btnMaterials, btnNotifications, btnMap, btnViewResults;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,18 @@ public class StudentHomeActivity extends AppCompatActivity {
             btnAssignments   = findViewById(R.id.btnAssignments);
             btnMaterials     = findViewById(R.id.btnMaterials);
             btnNotifications = findViewById(R.id.btnNotifications);
+            btnMap           = findViewById(R.id.btnStudentMap);
+            btnViewResults = findViewById(R.id.btnViewResults);
+            btnViewResults.setOnClickListener(v -> {
+                // Launch the AllResultsActivity
+                Intent intent = new Intent(this, AllResultsActivity.class);
+                startActivity(intent);
+            });
 
+            btnMap.setOnClickListener(v ->
+                startActivity(new Intent(this, StudentMapActivity.class))
+
+            );
             btnAttendance.setOnClickListener(v ->
                     startActivity(new Intent(this, StudentQRCodeActivity.class))
             );

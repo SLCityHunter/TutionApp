@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary brand colors -->
+    <color name="colorPrimary">#A7C17BDA</color>
+    <color name="colorSecondary">#03DAC5</color>
+    <color name="colorPrimaryVariant">#3700B3</color> <!-- Or choose your own hex -->
+
+    <color name="backgroundDark">#7BDAC9</color>
+
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="onSecondary">#000000</color>
+
+    <color name="backgroundLight">#B2CBB4DB</color>
+
+    <color name="buttonText">#E0CEEF</color>
+
+
 </resources>

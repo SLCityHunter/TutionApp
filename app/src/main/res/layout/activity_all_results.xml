@@ -3,28 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="40dp"
+    android:padding="50dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B2CBB4DB"> <!-- Soft brand background -->
+    android:background="#6FC7A7E9">
 
-    <!-- Page Title -->
+    <!-- Shown when there are no records -->
     <TextView
-        android:id="@+id/titleAttendance"
+        android:id="@+id/txtEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Attendance History"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:layout_marginBottom="12dp" />
+        android:text="No marks recorded yet."
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:textColor="@color/backgroundLight"
+        android:layout_marginBottom="16dp"/>
 
-    <!-- List of attendance timestamps -->
+    <!-- List of all student → [class] = mark -->
     <ListView
-        android:id="@+id/lvAttendance"
+        android:id="@+id/listResults"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:dividerHeight="8dp"
-        android:padding="8dp" />
+        android:layout_marginTop="12dp"/>
 </LinearLayout>

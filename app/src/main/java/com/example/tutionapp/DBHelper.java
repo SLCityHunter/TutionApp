@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME    = "tuition.db";
-    private static final int    DB_VERSION = 7;
+    private static final int    DB_VERSION = 9;
 
     // === USERS TABLE ===
     public static final String TABLE_USERS           = "users";
@@ -36,6 +39,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABLE_ASSIGNMENTS = "assignments";
 
     public static final String TABLE_NOTIFICATIONS = "notifications";
+
+
+
+    public static final String TABLE_MARKS      = "marks";
+    private static final String COL_MARK_ID    = "id";
+    private static final String COL_MARK_EMAIL = "student_email";
+    private static final String COL_MARK_CLASS = "class_name";
+    private static final String COL_MARK_VALUE = "mark";
 
 
 
@@ -123,6 +134,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "timestamp INTEGER)");
 
 
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_MARKS + " (" +
+                        COL_MARK_ID    + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COL_MARK_EMAIL + " TEXT    NOT NULL, " +
+                        COL_MARK_CLASS + " TEXT    NOT NULL, " +
+                        COL_MARK_VALUE + " INTEGER NOT NULL" +
+                        ")"
+        );
+
 
     }
 
@@ -135,8 +155,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MATERIALS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASSIGNMENTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTIFICATIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MARKS);
 
-
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_MARKS + " (" +
+                        COL_MARK_ID    + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COL_MARK_EMAIL + " TEXT    NOT NULL, " +
+                        COL_MARK_CLASS + " TEXT    NOT NULL, " +
+                        COL_MARK_VALUE + " INTEGER NOT NULL" +
+                        ")"
+        );
         onCreate(db);
     }
 
@@ -318,6 +346,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_MATERIALS, null, cv) != -1;
     }
 
+
     public Cursor getMaterialsByClass(int classId) {
         return getReadableDatabase().query(
                 TABLE_MATERIALS, null,
@@ -412,15 +441,89 @@ public class DBHelper extends SQLiteOpenHelper {
                 "uploaded_at DESC"
         );
     }
+    public boolean insertMark(String email, String className, int mark) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_MARK_EMAIL, email);
+        cv.put(COL_MARK_CLASS, className);
+        cv.put(COL_MARK_VALUE, mark);
+        long row = db.insert(TABLE_MARKS, null, cv);
+        return row != -1;
+    }
+    public List<String> getAllStudentEmails() {
+        List<String> emails = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(
+                TABLE_USERS,
+                new String[]{ COL_USER_EMAIL },
+                "role = ?", new String[]{ "student" },
+                null, null,
+                COL_USER_EMAIL + " ASC"
+        );
+        if (c.moveToFirst()) {
+            do {
+                emails.add(c.getString(
+                        c.getColumnIndexOrThrow(COL_USER_EMAIL)
+                ));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return emails;
+    }
 
+    /**
+     * Returns all class_name values for the given teacher.
+     */
+    /**
+     * Returns a list of all class_name values.
+     */
+    public List<String> getAllClassNames() {
+        List<String> classes = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(
+                TABLE_ASSIGNED_CLASSES,           // table name
+                new String[]{ "class_name" },     // columns to return
+                null, null,                       // no WHERE clause
+                null, null,                       // no GROUP BY / HAVING
+                "class_name ASC"                  // ORDER BY
+        );
 
+        if (c.moveToFirst()) {
+            int idx = c.getColumnIndexOrThrow("class_name");
+            do {
+                classes.add(c.getString(idx));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return classes;
+    }
+    public List<String> getAllMarks() {
+        List<String> list = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
 
+        Cursor c = db.query(
+                TABLE_MARKS,
+                new String[]{ COL_MARK_EMAIL, COL_MARK_CLASS, COL_MARK_VALUE },
+                null, null,    // no WHERE
+                null, null,    // no GROUP BY / HAVING
+                COL_MARK_EMAIL + " ASC"  // order by student_email
+        );
 
+        if (c.moveToFirst()) {
+            int idxEmail = c.getColumnIndexOrThrow(COL_MARK_EMAIL);
+            int idxClass = c.getColumnIndexOrThrow(COL_MARK_CLASS);
+            int idxMark  = c.getColumnIndexOrThrow(COL_MARK_VALUE);
 
-
-
-
-
+            do {
+                String email = c.getString(idxEmail);
+                String cls   = c.getString(idxClass);
+                int    m     = c.getInt(idxMark);
+                list.add(email + " → [" + cls + "] = " + m);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return list;
+    }
 
 
 }

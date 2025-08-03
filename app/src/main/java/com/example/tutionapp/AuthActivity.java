@@ -25,17 +25,17 @@ public class AuthActivity extends AppCompatActivity {
         etEmail       = findViewById(R.id.etEmail);
         etPassword    = findViewById(R.id.etPassword);
         btnLogin      = findViewById(R.id.btnLogin);
-        btnGoToSignUp = findViewById(R.id.btnGoToSignUp);
+//        btnGoToSignUp = findViewById(R.id.btnGoToSignUp);
 
         // Init DB helper and prefs
         dbHelper = new DBHelper(this);
         prefs    = getSharedPreferences("app_prefs", MODE_PRIVATE);
 
         // Launch SignUpActivity if user needs to register
-        btnGoToSignUp.setOnClickListener(v -> {
-            startActivity(new Intent(this, SignUpActivity.class));
-            finish();
-        });
+//        btnGoToSignUp.setOnClickListener(v -> {
+//            startActivity(new Intent(this, SignUpActivity.class));
+//            finish();
+//        });
 
         // Login flow
         btnLogin.setOnClickListener(v -> {
@@ -73,6 +73,7 @@ public class AuthActivity extends AppCompatActivity {
 
                     startActivity(i);
                     finish();
+                    
                 } else {
                     Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show();
                 }

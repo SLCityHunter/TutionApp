@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:gravity="center"
+    android:padding="30dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLight">
 
     <Button
         android:id="@+id/btnManageUsers"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/btn_rounded"
         android:text="Manage Users"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textColor="@color/buttonText"/>
 
     <Button
         android:id="@+id/btnAssignCourses"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/btn_rounded"
         android:text="Assign Courses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:textColor="@color/buttonText"/>
 
     <Button
         android:id="@+id/btnViewReports"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/btn_rounded"
         android:text="View Reports"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:textColor="@color/buttonText"/>
+
+    <Button
+        android:id="@+id/btnViewResults"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/btn_rounded"
+        android:text="View All Marks"
+        android:textColor="@color/buttonText"/>
 
 </LinearLayout>
